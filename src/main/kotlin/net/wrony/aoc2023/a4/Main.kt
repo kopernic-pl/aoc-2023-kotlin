@@ -20,7 +20,10 @@ data class Card(val number: Int, val wNumbers: Set<Int>, val tries: Set<Int>) {
 }
 
 fun lineToCard(line: String): Card {
-    return line.split(": ").let { (card, numbers) ->
+    return line
+        .replace("   ", " ")
+        .replace("  ", " ")
+        .split(": ").let { (card, numbers) ->
         val (wNumbers, tries) = numbers.split(" | ").let { (winningStr, tryStr) ->
             winningStr.split(" ").map { it.toInt() } to tryStr.split(" ").map { it.toInt() }
         }
@@ -35,8 +38,6 @@ fun lineToCard(line: String): Card {
 fun main() {
     val lines = Path("src/main/resources/4.txt").readLines()
     lines.asSequence()
-        .map { it.replace("   ", " ") }
-        .map { it.replace("  ", " ") }
         .map { lineToCard(it) }
         .filter { it.worthPoints() > 0 }
         .sumOf { c -> c.worthPoints() }
@@ -46,8 +47,6 @@ fun main() {
     val countsOfCards = IntArray(lines.size + 1) { 1 }
     countsOfCards[0] = 0
     lines
-        .map { it.replace("   ", " ") }
-        .map { it.replace("  ", " ") }
         .map { lineToCard(it) }
         .forEach { c ->
             if (c.worthCards() > 0)
