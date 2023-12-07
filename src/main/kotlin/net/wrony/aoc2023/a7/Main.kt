@@ -89,17 +89,30 @@ data class Hand(val cards: String, val bid: Int, val cardValMapper: (Char)->Int)
     }
 }
 
-fun main() {
-    val valMapper = { c: Char ->
-        when (c) {
-            'A' -> 14
-            'K' -> 13
-            'Q' -> 12
-            'J' -> 11
-            'T' -> 10
-            else -> c.toString().toInt()
-        }
+val valMapper = { c: Char ->
+    when (c) {
+        'A' -> 14
+        'K' -> 13
+        'Q' -> 12
+        'J' -> 11
+        'T' -> 10
+        else -> c.toString().toInt()
     }
+}
+
+val jokerizedValMapper = { c: Char ->
+    when (c) {
+        'A' -> 14
+        'K' -> 13
+        'Q' -> 12
+        'J' -> 1
+        'T' -> 10
+        else -> c.toString().toInt()
+    }
+}
+
+fun main() {
+
 
     Path("src/main/resources/7.txt").readLines()
         .map { fromTextLine(it, valMapper) }
@@ -110,17 +123,6 @@ fun main() {
 
     //255103572 -
     //254024898 OK
-
-    val jokerizedValMapper = { c: Char ->
-        when (c) {
-            'A' -> 14
-            'K' -> 13
-            'Q' -> 12
-            'J' -> 1
-            'T' -> 10
-            else -> c.toString().toInt()
-        }
-    }
 
     val c: Comparator<Hand> = Comparator { o1, o2 ->
         o1.compareJokerized(o2)
