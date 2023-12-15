@@ -1,13 +1,11 @@
 package net.wrony.aoc2023.a14
 
-import java.util.Arrays
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
 
 fun main() {
     Path("src/main/resources/14.txt").readLines().map { it.toCharArray() }.toTypedArray()
         .also {
-            val size = it.size
             transpose(it).map { r -> shiftTheRow(r) }.toTypedArray().let { arr ->
                 transpose(arr)
             }
