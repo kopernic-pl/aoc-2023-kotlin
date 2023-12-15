@@ -5,7 +5,7 @@ import kotlin.io.path.readText
 
 
 fun String.hASH(): Int {
-    return this.toCharArray().fold(0) { acc, c ->
+    return this.fold(0) { acc, c ->
         ((acc + c.code) * 17) % 256
     }
 }
