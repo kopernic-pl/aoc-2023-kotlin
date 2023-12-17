@@ -3,7 +3,6 @@ package net.wrony.aoc2023.a16
 import net.wrony.aoc2023.a10.Direction
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
-import kotlin.random.Random
 
 
 typealias Position = Pair<Int, Int>
