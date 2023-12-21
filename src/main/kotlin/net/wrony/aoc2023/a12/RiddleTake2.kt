@@ -9,13 +9,19 @@ fun txtToSprings2(s: String): Pair<String, List<Int>> {
 }
 
 val cache = mutableMapOf<Pair<String, List<Int>>, Long>()
+
 fun scanput2(str: String, counts: List<Int>): Long {
     // if str is empty - end of story
     if (str.isEmpty()) return if (counts.isEmpty()) 1 else 0
 
     if (counts.isEmpty()) return if (str.contains('#')) 0 else 1
 
+    println("Cache check for $str to $counts")
+
     return cache.getOrPut(str to counts) {
+
+        println(str)
+
         var res = 0L
 
         if (str[0] in ".?") {
@@ -43,12 +49,10 @@ fun main() {
             generateSequence { inp }.take(5).toList()
                 .joinToString("?") to List(5) { blocks }.flatten()
         }
-        .also { println(it.size) }
         .sumOf { (inp, blocks) ->
             scanput2(inp, blocks)
-        }.let { println(it) }
+        }.let { p2res -> println("Part 2: $p2res") }
 
     }
-    // 2416287867
 }
 
