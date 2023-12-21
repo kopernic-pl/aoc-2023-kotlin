@@ -108,7 +108,7 @@ fun main() {
         var currPos = start
         var goingTo = Direction.EAST
         var stepCount = 0
-        val visited = mutableSetOf<Pair<Int, Int>>(currPos);
+        val visited = mutableSetOf<Pair<Int, Int>>(currPos)
         while (true) {
             currPos = goingTo.transposition(currPos)
             stepCount++
